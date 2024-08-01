@@ -1,0 +1,6 @@
+@PoochyDexApi_HostAddress = http://localhost:5132
+
+GET {{PoochyDexApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
