@@ -17,10 +17,23 @@ namespace PoochyDexApi.Controllers
             //this.servicio = servicio;
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<ActionResult<List<PokemonList>>> Get()
         {
             return await context.PokemonList.ToListAsync();
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<PokemonList>> Get(int id)
+        {
+            var pokemon = await context.PokemonList.FirstOrDefaultAsync(x => x.Number == id);
+
+            if (pokemon == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pokemon);
         }
 
         [HttpPost]

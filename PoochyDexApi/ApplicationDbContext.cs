@@ -10,5 +10,9 @@ namespace PoochyDexApi
         }
 
         public DbSet<PokemonList> PokemonList { get; set; }
+        public DbSet<Games> Games{ get; set; }
+        public DbSet<Generation> Generation{ get; set; }
+        public DbSet<Region> Region{ get; set; }
+
     }
 }

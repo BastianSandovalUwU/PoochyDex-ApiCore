@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PoochyDexApi;
 
@@ -10,9 +11,11 @@ using PoochyDexApi;
 namespace PoochyDexApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240802143703_migracion5")]
+    partial class migracion5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,6 +40,8 @@ namespace PoochyDexApi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GenerationId");
 
                     b.ToTable("Games");
                 });
@@ -100,6 +105,20 @@ namespace PoochyDexApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Region");
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.Games", b =>
+                {
+                    b.HasOne("PoochyDexApi.Entities.Generation", null)
+                        .WithMany("Games")
+                        .HasForeignKey("GenerationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.Generation", b =>
+                {
+                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }
