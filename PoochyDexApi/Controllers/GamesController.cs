@@ -29,7 +29,7 @@ namespace PoochyDexApi.Controllers
 
             if (existGeneration)
             {
-                return BadRequest($"ya existe un uego con el nombre {game.GameName}");
+                return BadRequest($"ya existe un juego con el nombre {game.GameName}");
             }
 
 

@@ -9,12 +9,10 @@ namespace PoochyDexApi.Controllers
     public class PokemonController : ControllerBase
     {
         private readonly ApplicationDbContext context;
-        //private readonly iServicio servicio;
 
         public PokemonController(ApplicationDbContext context)
         {
             this.context = context;
-            //this.servicio = servicio;
         }
 
         [HttpGet("getAll")]
