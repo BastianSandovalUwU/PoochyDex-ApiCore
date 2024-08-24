@@ -21,7 +21,7 @@ namespace PoochyDexApi.Controllers
         public async Task<ActionResult<Generation>> Get(int id)
         {
             var generation = await context.Generation
-                                           .Include(g => g.Games)
+                                           .Include(g => g.VideoGames)
                                            .FirstOrDefaultAsync(x => x.Id == id);
 
             if (generation == null)
@@ -36,7 +36,7 @@ namespace PoochyDexApi.Controllers
         public async Task<ActionResult<List<Generation>>> Get()
         {
             return await context.Generation
-                                 .Include(g => g.Games)
+                                 .Include(g => g.VideoGames)
                                  .ToListAsync();
         }
 

@@ -32,12 +32,12 @@ namespace PoochyDexApi
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
 
-            //services.AddTransient<iServicio, ServicioA>();
-
 
             services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen();
+
+            services.AddAutoMapper(typeof(Startup));
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

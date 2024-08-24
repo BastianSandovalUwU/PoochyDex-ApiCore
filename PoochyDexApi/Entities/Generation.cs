@@ -7,6 +7,6 @@ namespace PoochyDexApi.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public List<Games>? Games { get; set; }
+        public List<VideoGames>? VideoGames { get; set; }
     }
 }

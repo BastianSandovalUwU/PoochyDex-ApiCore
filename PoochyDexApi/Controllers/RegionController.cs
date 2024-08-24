@@ -20,7 +20,7 @@ namespace PoochyDexApi.Controllers
         {
             return await context.Region
                                 .Include(r => r.Generation)       // Incluir la relación Generation
-                                    .ThenInclude(g => g.Games)    // Incluir la colección Games dentro de Generation
+                                    .ThenInclude(g => g.VideoGames)    // Incluir la colección Games dentro de Generation
                                 .ToListAsync();
         }
 
