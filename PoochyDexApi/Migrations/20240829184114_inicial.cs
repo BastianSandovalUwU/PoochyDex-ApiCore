@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PoochyDexApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,7 +24,7 @@ namespace PoochyDexApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PokemonList",
+                name: "Pokemon",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -36,7 +35,7 @@ namespace PoochyDexApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonList", x => x.Id);
+                    table.PrimaryKey("PK_Pokemon", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +93,9 @@ namespace PoochyDexApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Console = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VideoGamesId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -128,7 +129,7 @@ namespace PoochyDexApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PokemonList");
+                name: "Pokemon");
 
             migrationBuilder.DropTable(
                 name: "Region");

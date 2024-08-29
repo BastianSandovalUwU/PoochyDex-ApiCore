@@ -10,6 +10,8 @@ namespace PoochyDexApi.Utilities
         {
             CreateMap<NewVideoGameDTO, VideoGames>();
             CreateMap<VideoGames, VideoGameDTO>();
+            CreateMap<NewPokemonDTO, Pokemon>();
+            CreateMap<Pokemon, PokemonDTO>();
         }
     }
 }

@@ -12,8 +12,8 @@ using PoochyDexApi;
 namespace PoochyDexApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240824004903_nueva")]
-    partial class nueva
+    [Migration("20240829184717_inicial2")]
+    partial class inicial2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace PoochyDexApi.Migrations
                     b.ToTable("Generation");
                 });
 
-            modelBuilder.Entity("PoochyDexApi.Entities.PokemonList", b =>
+            modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace PoochyDexApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -63,7 +63,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PokemonList");
+                    b.ToTable("Pokemon");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Region", b =>
@@ -100,11 +100,13 @@ namespace PoochyDexApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date2")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Date2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")
                         .IsRequired()

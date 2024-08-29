@@ -39,7 +39,7 @@ namespace PoochyDexApi.Migrations
                     b.ToTable("Generation");
                 });
 
-            modelBuilder.Entity("PoochyDexApi.Entities.PokemonList", b =>
+            modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace PoochyDexApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -58,9 +58,16 @@ namespace PoochyDexApi.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type2")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("PokemonList");
+                    b.ToTable("Pokemon");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Region", b =>

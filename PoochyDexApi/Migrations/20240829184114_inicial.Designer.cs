@@ -12,8 +12,8 @@ using PoochyDexApi;
 namespace PoochyDexApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240824005217_nueva2")]
-    partial class nueva2
+    [Migration("20240829184114_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace PoochyDexApi.Migrations
                     b.ToTable("Generation");
                 });
 
-            modelBuilder.Entity("PoochyDexApi.Entities.PokemonList", b =>
+            modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PokemonList");
+                    b.ToTable("Pokemon");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Region", b =>

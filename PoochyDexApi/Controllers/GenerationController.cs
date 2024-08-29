@@ -9,12 +9,10 @@ namespace PoochyDexApi.Controllers
     public class GenerationController : ControllerBase
     {
         private readonly ApplicationDbContext context;
-        //private readonly iServicio servicio;
 
         public GenerationController(ApplicationDbContext context)
         {
             this.context = context;
-            //this.servicio = servicio;
         }
 
         [HttpGet("{id:int}")]
