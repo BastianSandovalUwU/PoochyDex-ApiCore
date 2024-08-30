@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PoochyDexApi.DTOs;
+using PoochyDexApi.DTOs.Pokemon;
 using PoochyDexApi.Entities;
 
 namespace PoochyDexApi.Controllers
@@ -20,15 +20,19 @@ namespace PoochyDexApi.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<List<Pokemon>>> Get()
+        public async Task<ActionResult<List<PokemonDTO>>> Get()
         {
-            return await context.Pokemon.ToListAsync();
+            var pokemon = await context.Pokemon.Include(x => x.Generation).ToListAsync();
+
+            return Ok(pokemon);
         }
 
         [HttpGet("{id:int}", Name = "getPokemon")]
-        public async Task<ActionResult<Pokemon>> Get(int id)
+        public async Task<ActionResult<PokemonDTO>> Get(int id)
         {
-            var pokemon = await context.Pokemon.FirstOrDefaultAsync(x => x.Number == id);
+            var pokemon = await context.Pokemon
+                .Include(x => x.Generation)
+                .FirstOrDefaultAsync(x => x.Number == id);
 
             if (pokemon == null)
             {
@@ -54,7 +58,7 @@ namespace PoochyDexApi.Controllers
             context.Add(pokemon);
             await context.SaveChangesAsync();
 
-            var pokemonDTO = mapper.Map<PokemonDTO>(pokemon);
+            var pokemonDTO = mapper.Map<NewPokemonDTO>(pokemon);
 
             return CreatedAtRoute("getPokemon", new { id = pokemon.Id }, pokemonDTO);
         }

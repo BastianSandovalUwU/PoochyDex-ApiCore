@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PoochyDexApi.DTOs.Generation;
 using PoochyDexApi.Entities;
 
 namespace PoochyDexApi.Controllers
@@ -9,10 +11,12 @@ namespace PoochyDexApi.Controllers
     public class GenerationController : ControllerBase
     {
         private readonly ApplicationDbContext context;
+        private readonly IMapper mapper;
 
-        public GenerationController(ApplicationDbContext context)
+        public GenerationController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet("{id:int}")]
@@ -39,18 +43,19 @@ namespace PoochyDexApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Generation generation)
+        public async Task<ActionResult> Post(NewGenerationDTO newGenerationDTO)
         {
 
-            var existGeneration = await context.Generation.AnyAsync(x => x.Name == generation.Name);
+            var existGeneration = await context.Generation.AnyAsync(x => x.Name == newGenerationDTO.Name);
 
             if (existGeneration)
             {
-                return BadRequest($"ya existe una generacion con el nombre {generation.Name}");
+                return BadRequest($"ya existe una generacion con el nombre {newGenerationDTO.Name}");
             }
+            
+            var pokemon = mapper.Map<Generation>(newGenerationDTO);
 
-
-            context.Add(generation);
+            context.Add(pokemon);
             await context.SaveChangesAsync();
             return Ok();
         }

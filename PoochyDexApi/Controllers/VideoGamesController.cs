@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PoochyDexApi.DTOs;
+using PoochyDexApi.DTOs.VideoGame;
 using PoochyDexApi.Entities;
 using System.Text.Json;
 
@@ -25,7 +25,9 @@ namespace PoochyDexApi.Controllers
         {
             try
             {
-                var games = await context.VideoGames.Include(x => x.ReleaseDates).ToListAsync();
+                var games = await context.VideoGames
+                    .Include(x => x.Generation)
+                    .Include(x => x.ReleaseDates).ToListAsync();
                 var gamesDTO = mapper.Map<List<VideoGameDTO>>(games);
                 return Ok(gamesDTO);
             }

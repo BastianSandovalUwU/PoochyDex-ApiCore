@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PoochyDexApi.DTOs.Region;
 using PoochyDexApi.Entities;
 
 namespace PoochyDexApi.Controllers
@@ -9,10 +11,12 @@ namespace PoochyDexApi.Controllers
     public class RegionController : ControllerBase
     {
         private readonly ApplicationDbContext context;
+        private readonly IMapper mapper;
 
-        public RegionController(ApplicationDbContext context)
+        public RegionController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet("getAll")]
@@ -25,16 +29,17 @@ namespace PoochyDexApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Region region)
+        public async Task<ActionResult> Post(NewRegionDTO newRegionDTO)
         {
 
-            var existGeneration = await context.Region.AnyAsync(x => x.RegionName == region.RegionName);
+            var existGeneration = await context.Region.AnyAsync(x => x.RegionName == newRegionDTO.RegionName);
 
             if (existGeneration)
             {
-                return BadRequest($"ya existe una region con el nombre {region.RegionName}");
+                return BadRequest($"ya existe una region con el nombre {newRegionDTO.RegionName}");
             }
 
+            var region = mapper.Map<Region>(newRegionDTO);
 
             context.Add(region);
             await context.SaveChangesAsync();

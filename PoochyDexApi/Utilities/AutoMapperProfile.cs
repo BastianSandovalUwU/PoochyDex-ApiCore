@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
-using PoochyDexApi.DTOs;
+using PoochyDexApi.DTOs.Generation;
+using PoochyDexApi.DTOs.Pokemon;
+using PoochyDexApi.DTOs.Region;
+using PoochyDexApi.DTOs.VideoGame;
 using PoochyDexApi.Entities;
 
 namespace PoochyDexApi.Utilities
@@ -11,7 +14,10 @@ namespace PoochyDexApi.Utilities
             CreateMap<NewVideoGameDTO, VideoGames>();
             CreateMap<VideoGames, VideoGameDTO>();
             CreateMap<NewPokemonDTO, Pokemon>();
-            CreateMap<Pokemon, PokemonDTO>();
+            CreateMap<Pokemon, PokemonDTO>().ReverseMap();
+            CreateMap<NewGenerationDTO, Generation>();
+            CreateMap<NewRegionDTO, Region>();
+
         }
     }
 }

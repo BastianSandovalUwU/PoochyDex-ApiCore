@@ -3,8 +3,9 @@
     public class VideoGames
     {
         public int Id { get; set; }
-        public string Generation { get; set; }
-        public List<string> GamesList { get; set; }
+        public required int generationId { get; set; }
+        public Generation Generation { get; set; }
+        public List<string> Games { get; set; }
         public List<string> UrlFrontPage { get; set; }
         public string Genre { get; set; }
         public string Players { get; set; }

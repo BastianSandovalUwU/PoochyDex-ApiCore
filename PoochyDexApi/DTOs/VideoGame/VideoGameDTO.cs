@@ -1,11 +1,12 @@
 ﻿using PoochyDexApi.Entities;
 
-namespace PoochyDexApi.DTOs
+namespace PoochyDexApi.DTOs.VideoGame
 {
-    public class NewVideoGameDTO
+    public class VideoGameDTO
     {
-        public string Generation { get; set; }
-        public List<string> GamesList { get; set; }
+        public int generationId { get; set; }
+        public Generation Generation { get; set; }
+        public List<string> Games { get; set; }
         public List<string> UrlFrontPage { get; set; }
         public string Genre { get; set; }
         public string Players { get; set; }
