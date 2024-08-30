@@ -30,8 +30,11 @@ namespace PoochyDexApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Number = table.Column<int>(type: "int", nullable: false)
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Number = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    generationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

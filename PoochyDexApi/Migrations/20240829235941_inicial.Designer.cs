@@ -12,8 +12,8 @@ using PoochyDexApi;
 namespace PoochyDexApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240829184717_inicial2")]
-    partial class inicial2
+    [Migration("20240829235941_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,16 @@ namespace PoochyDexApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("generationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

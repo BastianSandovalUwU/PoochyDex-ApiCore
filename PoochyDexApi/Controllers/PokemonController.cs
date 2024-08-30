@@ -42,7 +42,7 @@ namespace PoochyDexApi.Controllers
         public async Task<ActionResult> Post(NewPokemonDTO newPokemonDTO)
         {
 
-            var existePokemon = await context.Pokemon.AnyAsync(x => x.Name == newPokemonDTO.Name);
+            var existePokemon = await context.Pokemon.AnyAsync(x => x.Number == newPokemonDTO.Number);
 
             if (existePokemon)
             {

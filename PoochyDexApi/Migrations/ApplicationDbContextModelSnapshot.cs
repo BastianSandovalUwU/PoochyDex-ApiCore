@@ -59,11 +59,13 @@ namespace PoochyDexApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type2")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("generationId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

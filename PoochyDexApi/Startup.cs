@@ -20,7 +20,7 @@ namespace PoochyDexApi
                 options.AddPolicy("AllowSpecificOrigins",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:64392")  // Dirección del servidor Angular
+                        builder.WithOrigins("http://localhost:4200")  // Dirección del servidor Angular
                                .AllowAnyMethod()
                                .AllowAnyHeader();
                     });
