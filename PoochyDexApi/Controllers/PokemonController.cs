@@ -24,7 +24,9 @@ namespace PoochyDexApi.Controllers
         {
             var pokemon = await context.Pokemon.Include(x => x.Generation).ToListAsync();
 
-            return Ok(pokemon);
+            var pokemonDTO = mapper.Map<PokemonDTO>(pokemon);
+
+            return Ok(pokemonDTO);
         }
 
         [HttpGet("{id:int}", Name = "getPokemon")]
@@ -39,7 +41,9 @@ namespace PoochyDexApi.Controllers
                 return NotFound();
             }
 
-            return Ok(pokemon);
+            var pokemonDTO = mapper.Map<PokemonDTO>(pokemon);
+
+            return Ok(pokemonDTO);
         }
 
         [HttpPost]

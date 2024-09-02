@@ -14,7 +14,9 @@ namespace PoochyDexApi.Utilities
             CreateMap<NewVideoGameDTO, VideoGames>();
             CreateMap<VideoGames, VideoGameDTO>();
             CreateMap<NewPokemonDTO, Pokemon>();
-            CreateMap<Pokemon, PokemonDTO>().ReverseMap();
+            CreateMap<Pokemon, PokemonDTO>()
+                .ForMember(dest => dest.Generation, opt => opt.MapFrom(src => src.Generation));
+            CreateMap<Generation, GenerationDTO>();
             CreateMap<NewGenerationDTO, Generation>();
             CreateMap<NewRegionDTO, Region>();
 

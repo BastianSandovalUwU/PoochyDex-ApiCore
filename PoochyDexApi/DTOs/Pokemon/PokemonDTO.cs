@@ -1,4 +1,5 @@
-﻿using PoochyDexApi.Entities;
+﻿using PoochyDexApi.DTOs.Generation;
+using PoochyDexApi.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace PoochyDexApi.DTOs.Pokemon
@@ -11,6 +12,6 @@ namespace PoochyDexApi.DTOs.Pokemon
         public required string Type { get; set; }
         public string? Type2 { get; set; }
         public required int generationId { get; set; }
-        public Generation Generation { get; set; }
+        public GenerationDTO Generation { get; set; }
     }
 }
