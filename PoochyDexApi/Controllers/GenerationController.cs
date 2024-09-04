@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PoochyDexApi.DTOs.Generation;
+using PoochyDexApi.DTOs.Pokemon;
 using PoochyDexApi.Entities;
 
 namespace PoochyDexApi.Controllers
@@ -20,7 +21,7 @@ namespace PoochyDexApi.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Generation>> Get(int id)
+        public async Task<ActionResult<GenerationWithGamesDTO>> Get(int id)
         {
             var generation = await context.Generation
                                            .Include(g => g.VideoGames)
@@ -30,16 +31,21 @@ namespace PoochyDexApi.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(generation);
+         
+            return mapper.Map<GenerationWithGamesDTO>(generation);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Generation>>> Get()
+        [HttpGet("getAll")]
+        public async Task<ActionResult<List<GenerationWithGamesDTO>>> Get()
         {
-            return await context.Generation
-                                 .Include(g => g.VideoGames)
-                                 .ToListAsync();
+            var generations = await context.Generation
+                                  .Include(g => g.VideoGames)
+                                  .ToListAsync();
+
+            // Mapea la lista de Generation a una lista de GenerationWithGamesDTO
+            var generationDTOs = mapper.Map<List<GenerationWithGamesDTO>>(generations);
+
+            return Ok(generationDTOs);
         }
 
         [HttpPost]

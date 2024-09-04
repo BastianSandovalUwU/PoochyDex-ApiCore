@@ -1,5 +1,6 @@
 ﻿
 using PoochyDexApi.DTOs.Generation;
+using PoochyDexApi.DTOs.ReleaseDate;
 using PoochyDexApi.Entities;
 
 namespace PoochyDexApi.DTOs.VideoGame
@@ -7,17 +8,17 @@ namespace PoochyDexApi.DTOs.VideoGame
     public class VideoGameDTO
     {
         public int generationId { get; set; }
-        public GenerationDTO Generation { get; set; }
-        public List<string> Games { get; set; }
-        public List<string> UrlFrontPage { get; set; }
-        public string Genre { get; set; }
-        public string Players { get; set; }
-        public string PublishedBy { get; set; }
-        public string DevelopedBy { get; set; }
-        public List<string> Platforms { get; set; }
-        public string GameHistory { get; set; }
-        public string Characters { get; set; }
-        public string Summary { get; set; }
-        public List<ReleaseDate> ReleaseDates { get; set; }
+        public required int RegionId { get; set; }
+        public required GenerationDTO Generation { get; set; }
+        public required List<string> Games { get; set; }
+        public required List<string> UrlFrontPage { get; set; }
+        public required string Genre { get; set; }
+        public required string Players { get; set; }
+        public required string PublishedBy { get; set; }
+        public required string DevelopedBy { get; set; }
+        public required List<string> Platforms { get; set; }
+        public string? GameHistory { get; set; }
+        public string? Summary { get; set; }
+        public List<ReleaseDateDTO>? ReleaseDates { get; set; }
     }
 }

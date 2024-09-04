@@ -34,6 +34,7 @@ namespace PoochyDexApi.Controllers
         {
             var pokemon = await context.Pokemon
                 .Include(x => x.Generation)
+                    .ThenInclude(g => g.VideoGames) // Incluir los videojuegos relacionados
                 .FirstOrDefaultAsync(x => x.Number == id);
 
             if (pokemon == null)

@@ -11,7 +11,7 @@ namespace PoochyDexApi.Entities
         public string? Type { get; set; }
         public string? Type2 { get; set; }
         public required int generationId { get; set; }
-        public Generation Generation { get; set; }
+        public Generation? Generation { get; set; }
 
     }
 }

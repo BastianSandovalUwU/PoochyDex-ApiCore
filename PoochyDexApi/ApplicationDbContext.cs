@@ -15,5 +15,17 @@ namespace PoochyDexApi
         public DbSet<Generation> Generation { get; set; }
         public DbSet<Region> Region { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<VideoGames>()
+           .HasMany(vg => vg.ReleaseDates)
+           .WithOne(rd => rd.VideoGame)
+           .HasForeignKey(rd => rd.VideoGameId); // Nombre del campo de clave foránea
+
+            // Configuración adicional si es necesaria
+        }
+
     }
 }

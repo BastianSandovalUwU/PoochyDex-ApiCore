@@ -8,4 +8,10 @@ namespace PoochyDexApi.DTOs.Generation
         public List<VideoGameInGenerationDTO>? VideoGames { get; set; }
 
     }
+
+    public class VideoGameInGenerationDTO
+    {
+        public required List<string> Games { get; set; }
+        public required List<string> Platforms { get; set; }
+    }
 }

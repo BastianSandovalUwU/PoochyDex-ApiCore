@@ -20,12 +20,14 @@ namespace PoochyDexApi.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<List<Region>>> Get()
+        public async Task<ActionResult<List<RegionDTO>>> Get()
         {
-            return await context.Region
+            var region = await context.Region
                                 .Include(r => r.Generation)       // Incluir la relación Generation
                                     .ThenInclude(g => g.VideoGames)    // Incluir la colección Games dentro de Generation
                                 .ToListAsync();
+
+            return mapper.Map<List<RegionDTO>>(region);
         }
 
         [HttpPost]
