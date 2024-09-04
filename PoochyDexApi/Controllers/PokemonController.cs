@@ -22,11 +22,14 @@ namespace PoochyDexApi.Controllers
         [HttpGet("getAll")]
         public async Task<ActionResult<List<PokemonDTO>>> Get()
         {
-            var pokemon = await context.Pokemon.Include(x => x.Generation).ToListAsync();
+            var pokemon = await context.Pokemon
+                .Include(x => x.Generation)
+                .ThenInclude(g => g.VideoGames) // Incluir los videojuegos relacionados
+                .ToListAsync();
 
-            var pokemonDTO = mapper.Map<PokemonDTO>(pokemon);
+            var pokemonDTOs = mapper.Map<List<PokemonDTO>>(pokemon);
 
-            return Ok(pokemonDTO);
+            return Ok(pokemonDTOs);
         }
 
         [HttpGet("{id:int}", Name = "getPokemon")]

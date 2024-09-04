@@ -162,6 +162,9 @@ namespace PoochyDexApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RegionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Summary")
                         .HasColumnType("nvarchar(max)");
 
