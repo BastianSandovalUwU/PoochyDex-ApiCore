@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PoochyDexApi.DTOs.Pokemon;
+using PoochyDexApi.DTOs.VideoGame;
 using PoochyDexApi.Entities;
 
 namespace PoochyDexApi.Controllers
@@ -69,6 +70,30 @@ namespace PoochyDexApi.Controllers
             var pokemonDTO = mapper.Map<NewPokemonDTO>(pokemon);
 
             return CreatedAtRoute("getPokemon", new { id = pokemon.Id }, pokemonDTO);
+        }
+
+        [HttpPut("update/{id:int}")]
+        public async Task<ActionResult<PokemonDTO>> Put(int id, NewPokemonDTO newPokemonDTO)
+        {
+            var existingPokemon = await context.Pokemon
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingPokemon == null)
+            {
+                return NotFound("No se encuentra un Pokémon con este ID.");
+            }
+
+            existingPokemon.Name = newPokemonDTO.Name;
+            existingPokemon.ImageURL = newPokemonDTO.ImageURL;
+            existingPokemon.Type = newPokemonDTO.Type;
+            existingPokemon.Type2 = newPokemonDTO.Type2;
+            
+            context.Update(existingPokemon);
+            await context.SaveChangesAsync();
+
+            var pokemonDTO = mapper.Map<PokemonDTO>(existingPokemon);
+
+            return Ok(pokemonDTO);
         }
     }
 }
