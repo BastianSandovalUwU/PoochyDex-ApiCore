@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PoochyDexApi;
 
@@ -11,9 +12,11 @@ using PoochyDexApi;
 namespace PoochyDexApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240907051621_NewPokemonData")]
+    partial class NewPokemonData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +44,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("FormsId");
 
-                    b.ToTable("FormData", (string)null);
+                    b.ToTable("FormData");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Forms", b =>
@@ -59,7 +62,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("PokemonId");
 
-                    b.ToTable("Forms", (string)null);
+                    b.ToTable("Forms");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Generation", b =>
@@ -76,7 +79,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Generation", (string)null);
+                    b.ToTable("Generation");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
@@ -113,7 +116,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("generationId");
 
-                    b.ToTable("Pokemon", (string)null);
+                    b.ToTable("Pokemon");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Region", b =>
@@ -135,7 +138,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("GenerationId");
 
-                    b.ToTable("Region", (string)null);
+                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.ReleaseDate", b =>
@@ -168,7 +171,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("VideoGameId");
 
-                    b.ToTable("ReleaseDate", (string)null);
+                    b.ToTable("ReleaseDate");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.VideoGames", b =>
@@ -223,7 +226,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("generationId");
 
-                    b.ToTable("VideoGames", (string)null);
+                    b.ToTable("VideoGames");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.FormData", b =>

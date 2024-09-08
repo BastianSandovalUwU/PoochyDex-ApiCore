@@ -45,6 +45,7 @@ namespace PoochyDexApi.Controllers
 
             var videoGame = await context.VideoGames
                 .Include(x => x.Generation)
+                    .ThenInclude(g => g.VideoGames)
                 .Include(x => x.ReleaseDates)
                 .FirstOrDefaultAsync(x => x.Id == id);
 

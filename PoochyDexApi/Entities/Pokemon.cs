@@ -12,6 +12,9 @@ namespace PoochyDexApi.Entities
         public string? Type2 { get; set; }
         public required int generationId { get; set; }
         public Generation? Generation { get; set; }
+        public bool? AltForms { get; set; }
+        public List<Sprites>? Sprites { get; set; } 
+        public List<Forms>? Forms { get; set; }
 
     }
 }

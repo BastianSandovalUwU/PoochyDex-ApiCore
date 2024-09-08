@@ -12,6 +12,6 @@ namespace PoochyDexApi.DTOs.Pokemon
         public required string Type { get; set; }
         public string? Type2 { get; set; }
         public required int generationId { get; set; }
-        public GenerationDTO Generation { get; set; }
+        public required GenerationWithGamesDTO Generation { get; set; }
     }
 }

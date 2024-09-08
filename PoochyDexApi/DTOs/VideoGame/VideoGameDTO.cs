@@ -9,7 +9,7 @@ namespace PoochyDexApi.DTOs.VideoGame
     {
         public int generationId { get; set; }
         public required int RegionId { get; set; }
-        public required GenerationDTO Generation { get; set; }
+        public required GenerationWithGamesDTO Generation { get; set; }
         public required List<string> Games { get; set; }
         public required List<string> UrlFrontPage { get; set; }
         public required string Genre { get; set; }

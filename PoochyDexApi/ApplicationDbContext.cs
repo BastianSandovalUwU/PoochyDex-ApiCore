@@ -14,10 +14,11 @@ namespace PoochyDexApi
         public DbSet<Pokemon> Pokemon { get; set; }
         public DbSet<Generation> Generation { get; set; }
         public DbSet<Region> Region { get; set; }
+        public DbSet<Sprites> Sprites { get; set; }
+        public DbSet<Forms> Forms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<VideoGames>()
            .HasMany(vg => vg.ReleaseDates)
@@ -25,6 +26,26 @@ namespace PoochyDexApi
            .HasForeignKey(rd => rd.VideoGameId); // Nombre del campo de clave foránea
 
             // Configuración adicional si es necesaria
+            modelBuilder.Entity<Pokemon>()
+                .HasKey(p => p.Id); // Definir Id como clave primaria
+        
+            modelBuilder.Entity<Forms>()
+                .HasKey(f => f.Id); // Definir Id como clave primaria
+        
+            modelBuilder.Entity<Forms>()
+                .HasOne(f => f.Pokemon)
+                .WithMany(p => p.Forms)
+                .HasForeignKey(f => f.PokemonId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Sprites>()
+                .HasOne(s => s.Pokemon)
+                .WithMany(p => p.Sprites) // Asegúrate de que 'Sprites' es una lista
+                .HasForeignKey(s => s.PokemonId)
+                .OnDelete(DeleteBehavior.SetNull); 
+
+            base.OnModelCreating(modelBuilder);
+            
         }
 
     }
