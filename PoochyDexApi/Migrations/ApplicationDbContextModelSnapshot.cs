@@ -41,7 +41,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("FormsId");
 
-                    b.ToTable("FormData", (string)null);
+                    b.ToTable("FormData");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Forms", b =>
@@ -59,7 +59,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("PokemonId");
 
-                    b.ToTable("Forms", (string)null);
+                    b.ToTable("Forms");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Generation", b =>
@@ -76,7 +76,31 @@ namespace PoochyDexApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Generation", (string)null);
+                    b.ToTable("Generation");
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.HomeSprites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("HomeUrlShinySpritre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeUrlSpritre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SpritesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpritesId");
+
+                    b.ToTable("HomeSprites");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
@@ -113,7 +137,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("generationId");
 
-                    b.ToTable("Pokemon", (string)null);
+                    b.ToTable("Pokemon");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Region", b =>
@@ -135,7 +159,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("GenerationId");
 
-                    b.ToTable("Region", (string)null);
+                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.ReleaseDate", b =>
@@ -168,7 +192,25 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("VideoGameId");
 
-                    b.ToTable("ReleaseDate", (string)null);
+                    b.ToTable("ReleaseDate");
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.Sprites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("PokemonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
+
+                    b.ToTable("Sprites");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.VideoGames", b =>
@@ -223,7 +265,7 @@ namespace PoochyDexApi.Migrations
 
                     b.HasIndex("generationId");
 
-                    b.ToTable("VideoGames", (string)null);
+                    b.ToTable("VideoGames");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.FormData", b =>
@@ -241,6 +283,13 @@ namespace PoochyDexApi.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Pokemon");
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.HomeSprites", b =>
+                {
+                    b.HasOne("PoochyDexApi.Entities.Sprites", null)
+                        .WithMany("HomeSprites")
+                        .HasForeignKey("SpritesId");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
@@ -276,6 +325,16 @@ namespace PoochyDexApi.Migrations
                     b.Navigation("VideoGame");
                 });
 
+            modelBuilder.Entity("PoochyDexApi.Entities.Sprites", b =>
+                {
+                    b.HasOne("PoochyDexApi.Entities.Pokemon", "Pokemon")
+                        .WithMany("Sprites")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Pokemon");
+                });
+
             modelBuilder.Entity("PoochyDexApi.Entities.VideoGames", b =>
                 {
                     b.HasOne("PoochyDexApi.Entities.Generation", "Generation")
@@ -300,6 +359,13 @@ namespace PoochyDexApi.Migrations
             modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
                 {
                     b.Navigation("Forms");
+
+                    b.Navigation("Sprites");
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.Sprites", b =>
+                {
+                    b.Navigation("HomeSprites");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.VideoGames", b =>

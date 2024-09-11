@@ -25,10 +25,6 @@ namespace PoochyDexApi
            .WithOne(rd => rd.VideoGame)
            .HasForeignKey(rd => rd.VideoGameId); // Nombre del campo de clave foránea
 
-            // Configuración adicional si es necesaria
-            modelBuilder.Entity<Pokemon>()
-                .HasKey(p => p.Id); // Definir Id como clave primaria
-        
             modelBuilder.Entity<Forms>()
                 .HasKey(f => f.Id); // Definir Id como clave primaria
         

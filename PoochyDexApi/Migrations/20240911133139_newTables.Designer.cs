@@ -12,8 +12,8 @@ using PoochyDexApi;
 namespace PoochyDexApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240907051621_NewPokemonData")]
-    partial class NewPokemonData
+    [Migration("20240911133139_newTables")]
+    partial class newTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,30 @@ namespace PoochyDexApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Generation");
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.HomeSprites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("HomeUrlShinySpritre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeUrlSpritre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SpritesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpritesId");
+
+                    b.ToTable("HomeSprites");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
@@ -174,6 +198,24 @@ namespace PoochyDexApi.Migrations
                     b.ToTable("ReleaseDate");
                 });
 
+            modelBuilder.Entity("PoochyDexApi.Entities.Sprites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("PokemonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
+
+                    b.ToTable("Sprites");
+                });
+
             modelBuilder.Entity("PoochyDexApi.Entities.VideoGames", b =>
                 {
                     b.Property<int>("Id")
@@ -246,6 +288,13 @@ namespace PoochyDexApi.Migrations
                     b.Navigation("Pokemon");
                 });
 
+            modelBuilder.Entity("PoochyDexApi.Entities.HomeSprites", b =>
+                {
+                    b.HasOne("PoochyDexApi.Entities.Sprites", null)
+                        .WithMany("HomeSprites")
+                        .HasForeignKey("SpritesId");
+                });
+
             modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
                 {
                     b.HasOne("PoochyDexApi.Entities.Generation", "Generation")
@@ -279,6 +328,16 @@ namespace PoochyDexApi.Migrations
                     b.Navigation("VideoGame");
                 });
 
+            modelBuilder.Entity("PoochyDexApi.Entities.Sprites", b =>
+                {
+                    b.HasOne("PoochyDexApi.Entities.Pokemon", "Pokemon")
+                        .WithMany("Sprites")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Pokemon");
+                });
+
             modelBuilder.Entity("PoochyDexApi.Entities.VideoGames", b =>
                 {
                     b.HasOne("PoochyDexApi.Entities.Generation", "Generation")
@@ -303,6 +362,13 @@ namespace PoochyDexApi.Migrations
             modelBuilder.Entity("PoochyDexApi.Entities.Pokemon", b =>
                 {
                     b.Navigation("Forms");
+
+                    b.Navigation("Sprites");
+                });
+
+            modelBuilder.Entity("PoochyDexApi.Entities.Sprites", b =>
+                {
+                    b.Navigation("HomeSprites");
                 });
 
             modelBuilder.Entity("PoochyDexApi.Entities.VideoGames", b =>

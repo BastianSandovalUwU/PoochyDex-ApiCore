@@ -20,7 +20,7 @@ namespace PoochyDexApi
                 options.AddPolicy("AllowSpecificOrigins",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200")  // Dirección del servidor Angular
+                        builder.WithOrigins("http://localhost", "http://localhost:*", "https://poochy-dex.web.app")  // Cualquier puerto de localhost y la URL específica
                                .AllowAnyMethod()
                                .AllowAnyHeader();
                     });

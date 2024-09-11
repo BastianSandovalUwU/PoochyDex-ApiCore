@@ -4,6 +4,7 @@ namespace PoochyDexApi.Entities
 {
     public class Pokemon
     {
+        [Key]
         public required int Id { get; set; }
         public required string Name { get; set; }
         public string? ImageURL { get; set; }
