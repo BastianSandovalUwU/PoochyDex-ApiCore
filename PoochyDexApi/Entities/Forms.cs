@@ -15,6 +15,8 @@ namespace PoochyDexApi.Entities
     public class FormData {
         public required int Id {  get; set; }
         public required string FormName {  get; set; }
+        public int? HomeSpriteId { get; set; }
+        public HomeSprites? HomeSprite { get; set; }
 
     }
 }

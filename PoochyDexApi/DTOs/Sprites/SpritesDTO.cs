@@ -9,7 +9,7 @@ namespace PoochyDexApi.DTOs.Sprites
 
     public class HomeSpritesDTO
     {
-        public string? HomeUrlSpritre { get; set; }
-        public string? HomeUrlShinySpritre { get; set; }
+        public string? HomeUrlSprite { get; set; }
+        public string? HomeUrlShinySprite { get; set; }
     }
 }

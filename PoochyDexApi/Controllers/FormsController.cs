@@ -42,8 +42,14 @@ namespace PoochyDexApi.Controllers
             { 
                 return BadRequest("Ese pokemon no existe");
             }
+            // Crea un nuevo objeto NewFormDTOwithPokemonId y asigna los valores
+            var newFormWithPokemonId = new NewFormDTOwithPokemonId
+            {
+                PokemonForms = newFormDTO.PokemonForms,
+                PokemonId = id
+            };
 
-            var form = mapper.Map<Forms>(newFormDTO);
+            var form = mapper.Map<Forms>(newFormWithPokemonId);
             context.Add(form);
             await context.SaveChangesAsync();
             return Ok(form);

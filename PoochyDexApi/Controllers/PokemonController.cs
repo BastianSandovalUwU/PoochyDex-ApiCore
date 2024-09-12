@@ -39,6 +39,8 @@ namespace PoochyDexApi.Controllers
             var pokemon = await context.Pokemon
                 .Include(x => x.Generation)
                     .ThenInclude(g => g.VideoGames) // Incluir los videojuegos relacionados
+                .Include(x => x.Forms)
+                    .ThenInclude(f => f.PokemonForms)
                 .FirstOrDefaultAsync(x => x.Number == id);
 
             if (pokemon == null)
@@ -48,7 +50,18 @@ namespace PoochyDexApi.Controllers
 
             var pokemonDTO = mapper.Map<PokemonDTO>(pokemon);
 
-            return Ok(pokemonDTO);
+            var groupedPokemonForms = pokemonDTO.Forms
+                                        .SelectMany(f => f.PokemonForms)
+                                        .ToList();
+
+            var result = new
+            {
+                pokemonDTO.Name,
+                Generation = pokemonDTO.Generation,
+                Forms = groupedPokemonForms // Aquí tienes todos los 'pokemonForms' en un solo array
+            };
+
+            return Ok(result);
         }
 
         [HttpPost]

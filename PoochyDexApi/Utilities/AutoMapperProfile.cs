@@ -47,7 +47,7 @@ namespace PoochyDexApi.Utilities
             CreateMap<RegionDTO, Region>();
             CreateMap<Region, RegionDTO>();
 
-            CreateMap<NewFormDTO, Forms>()
+            CreateMap<NewFormDTOwithPokemonId, Forms>()
                 .ForMember(dest => dest.PokemonForms, opt => opt.MapFrom(src => src.PokemonForms));
 
             CreateMap<FormDataDTO, FormData>();
@@ -56,6 +56,15 @@ namespace PoochyDexApi.Utilities
                         .ForMember(dest => dest.PokemonForms, opt => opt.MapFrom(src => src.PokemonForms));
 
             CreateMap<FormData, FormDataDTO>();
+
+            // Mapeo para Forms y su DTO
+            CreateMap<Forms, FormDtoInPokemon>()
+                .ForMember(dest => dest.PokemonForms, opt => opt.MapFrom(src => src.PokemonForms));
+
+            // Mapeo para FormData y su DTO
+            CreateMap<FormData, FormDataDtoInPokemon>();
+
+
 
         }
     }

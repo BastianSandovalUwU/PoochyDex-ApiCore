@@ -46,6 +46,12 @@ namespace PoochyDexApi
             .HasForeignKey(f => f.PokemonId)
             .OnDelete(DeleteBehavior.Restrict); // Ajusta el comportamiento de eliminación si es necesario
 
+            modelBuilder.Entity<FormData>()
+            .HasOne(f => f.HomeSprite)
+            .WithMany()
+            .HasForeignKey(f => f.HomeSpriteId)
+            .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
             
         }

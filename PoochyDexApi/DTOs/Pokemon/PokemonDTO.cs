@@ -17,6 +17,6 @@ namespace PoochyDexApi.DTOs.Pokemon
         public required GenerationWithGamesDTO Generation { get; set; }
         public bool? AltForms { get; set; }
         public List<SpritesDTO>? Sprites { get; set; }
-        public List<FormsDTO>? Forms { get; set; }
+        public List<FormDtoInPokemon>? Forms { get; set; }
     }
 }
