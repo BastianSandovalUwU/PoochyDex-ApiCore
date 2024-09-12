@@ -38,7 +38,13 @@ namespace PoochyDexApi
                 .HasOne(s => s.Pokemon)
                 .WithMany(p => p.Sprites) // Asegúrate de que 'Sprites' es una lista
                 .HasForeignKey(s => s.PokemonId)
-                .OnDelete(DeleteBehavior.SetNull); 
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Forms>()
+            .HasOne(f => f.Pokemon)
+            .WithMany(p => p.Forms)
+            .HasForeignKey(f => f.PokemonId)
+            .OnDelete(DeleteBehavior.Restrict); // Ajusta el comportamiento de eliminación si es necesario
 
             base.OnModelCreating(modelBuilder);
             

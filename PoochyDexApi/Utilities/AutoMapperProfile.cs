@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PoochyDexApi.DTOs.Forms;
 using PoochyDexApi.DTOs.Generation;
 using PoochyDexApi.DTOs.Pokemon;
 using PoochyDexApi.DTOs.Region;
@@ -45,6 +46,16 @@ namespace PoochyDexApi.Utilities
             CreateMap<ReleaseDate, ReleaseDateDTO>();
             CreateMap<RegionDTO, Region>();
             CreateMap<Region, RegionDTO>();
+
+            CreateMap<NewFormDTO, Forms>()
+                .ForMember(dest => dest.PokemonForms, opt => opt.MapFrom(src => src.PokemonForms));
+
+            CreateMap<FormDataDTO, FormData>();
+            CreateMap<Forms, FormsDTO>()
+                        .ForMember(dest => dest.PokemonId, opt => opt.MapFrom(src => src.PokemonId)) // Mapea PokemonId
+                        .ForMember(dest => dest.PokemonForms, opt => opt.MapFrom(src => src.PokemonForms));
+
+            CreateMap<FormData, FormDataDTO>();
 
         }
     }
