@@ -56,8 +56,7 @@ namespace PoochyDexApi.Controllers
 
             var result = new
             {
-                pokemonDTO.Name,
-                Generation = pokemonDTO.Generation,
+                pokemonDTO,
                 Forms = groupedPokemonForms // Aquí tienes todos los 'pokemonForms' en un solo array
             };
 

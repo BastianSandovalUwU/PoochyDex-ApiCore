@@ -8,10 +8,4 @@ namespace PoochyDexApi.Entities
         public List<HomeSprites>? HomeSprites { get; set; }
     }
 
-    public class HomeSprites 
-    {
-        public required int Id { get; set; }
-        public string? HomeUrlSprite { get; set; }
-        public string? HomeUrlShinySprite { get; set; }
-    }
 }

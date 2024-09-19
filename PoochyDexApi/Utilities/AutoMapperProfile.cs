@@ -4,6 +4,7 @@ using PoochyDexApi.DTOs.Generation;
 using PoochyDexApi.DTOs.Pokemon;
 using PoochyDexApi.DTOs.Region;
 using PoochyDexApi.DTOs.ReleaseDate;
+using PoochyDexApi.DTOs.Sprites;
 using PoochyDexApi.DTOs.VideoGame;
 using PoochyDexApi.Entities;
 
@@ -20,6 +21,7 @@ namespace PoochyDexApi.Utilities
                         .ForMember(dest => dest.ReleaseDates, opt => opt.MapFrom(src => src.ReleaseDates));
             CreateMap<NewPokemonDTO, Pokemon>();
             CreateMap<Pokemon, PokemonDTO>()
+                       .ForMember(dest => dest.Forms, opt => opt.MapFrom(src => src.Forms))
                        .ForMember(dest => dest.Generation, opt => opt.MapFrom(src => src.Generation));
             CreateMap<Generation, GenerationDTO>()
                         .ForMember(dest => dest.VideoGames, opt => opt.MapFrom(src => src.VideoGames
@@ -63,6 +65,8 @@ namespace PoochyDexApi.Utilities
 
             // Mapeo para FormData y su DTO
             CreateMap<FormData, FormDataDtoInPokemon>();
+            CreateMap<HomeSpritesDTO, HomeSprites>();
+            CreateMap<HomeSprites, HomeSpritesDTO>();
 
 
 

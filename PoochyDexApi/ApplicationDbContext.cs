@@ -15,6 +15,7 @@ namespace PoochyDexApi
         public DbSet<Generation> Generation { get; set; }
         public DbSet<Region> Region { get; set; }
         public DbSet<Sprites> Sprites { get; set; }
+        public DbSet<HomeSprites> HomeSprites { get; set; }
         public DbSet<Forms> Forms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
